@@ -22,7 +22,7 @@
         nombre="Tarta de Chocolate" precio="40 córdobas"
         descripcion="Una deliciosa tarta de chocolate con crema y fresas." />
       <ContenedorPostres
-        imagen="https://i0.wp.com/hotbook.mx/wp-content/uploads/2019/02/portada-5-deliciosos-postres-para-este-14-de-febrero-dia-de-san-valentin-zoom-rafael-nadal-love-14-de-febrero-whatsapp.jpg?fit=682%2C1024&ssl=1"
+        imagen="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfw4G0wpSPny4LcaHYPILCpbik-3Em7vI17A&s"
         nombre="Tarta de Chocolate" precio="40 córdobas"
         descripcion="Una deliciosa tarta de chocolate con crema y fresas." />
       <ContenedorPostres

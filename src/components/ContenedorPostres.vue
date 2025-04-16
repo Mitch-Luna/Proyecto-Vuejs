@@ -54,6 +54,7 @@ export default {
   justify-content: space-between;
 }
 .img-container {
+  display: flex;
   width: 100%;
   height: 200px;
   overflow: hidden;
