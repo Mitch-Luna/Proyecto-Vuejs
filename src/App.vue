@@ -1,6 +1,6 @@
 <template>
 
-  <body>
+
     <headerPostres msg="" />
     <div class="banner">
       <div class="banner-text">
@@ -12,31 +12,27 @@
     <div class="contendorBoton">
       <BotonesPostres texto="Agregar Postre" color="green" :accion="miFuncion" />
     </div>
+    <div class="formulario">
+      <h2>Agregar Nuevo Postre</h2>
+      <form @submit.prevent="enviarPostre">
+        <input type="text" v-model="nuevoPostre.name" placeholder="Nombre del postre" required />
+        <input type="number" v-model="nuevoPostre.price" placeholder="Precio" step="0.01" required />
+        <textarea v-model="nuevoPostre.description" placeholder="Descripción del postre" required></textarea>
+        <input type="file" @change="handleFileUpload" required />
+        <button type="submit">Guardar Postre</button>
+      </form>
+    </div>
     <div class="carrusel">
-      <ContenedorPostres
-        imagen="https://th.bing.com/th/id/R.deffe97048c751f220d659004f272ada?rik=g6mjRE5ypRP8sg&riu=http%3a%2f%2f4.bp.blogspot.com%2f-4E2I64KC63o%2fVFA_uBG7vLI%2fAAAAAAAAADk%2fa6W_PhUW4eY%2fw1200-h630-p-k-no-nu%2fdics.jpg&ehk=Ds%2feqMnxGwDJXeEAADjVJw4GC6aLhcwdsCfIE%2f89sWE%3d&risl=&pid=ImgRaw&r=0"
-        nombre="Tarta de Chocolate" precio="40 córdobas"
-        descripcion="Una deliciosa tarta de chocolate con crema y fresas." />
-      <ContenedorPostres
-        imagen="https://blogs.oximesa.es/wp-content/uploads/2017/11/Postres-deliciosos-y-saludables.jpg"
-        nombre="Tarta de Chocolate" precio="40 córdobas"
-        descripcion="Una deliciosa tarta de chocolate con crema y fresas." />
-      <ContenedorPostres
-        imagen="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfw4G0wpSPny4LcaHYPILCpbik-3Em7vI17A&s"
-        nombre="Tarta de Chocolate" precio="40 córdobas"
-        descripcion="Una deliciosa tarta de chocolate con crema y fresas." />
-      <ContenedorPostres
-        imagen="https://previews.123rf.com/images/tacar/tacar0805/tacar080500005/2996905-deliciosos-postres-hechos-con-ingredientes-org%C3%A1nicos-seleccionados.jpg"
-        nombre="Tarta de Chocolate" precio="40 córdobas"
-        descripcion="Una deliciosa tarta de chocolate con crema y fresas." />
-      <ContenedorPostres
-        imagen="https://www.gastrolabweb.com/u/fotografias/m/2022/12/20/f960x540-39687_113762_5756.jpg"
-        nombre="Tarta de Chocolate" precio="40 córdobas"
-        descripcion="Una deliciosa tarta de chocolate con crema y fresas." />
+      <ContenedorPostres v-for="(postre, index) in postres" :key="index"
+        :image_url="`http://localhost:4000/uploads/${postre.image_url}`"
+        :name="postre.name" :description="postre.description"
+        :price="postre.price" 
+        />
+       
+
 
     </div>
-    
-  </body>
+
 </template>
 
 <script>
@@ -51,12 +47,72 @@ export default {
     ContenedorPostres,
     BotonesPostres,
   },
+  data() {
+    return {
+      nuevoPostre: {
+        name: '',
+        price: '',
+        description: '',
+        image_url: null,
+      },
+      postres: [],
+    };
+  },
   methods: {
     miFuncion() {
       alert('agregar postre');
     },
-    }
-}
+    handleFileUpload(event) {
+      this.nuevoPostre.image_url = event.target.files[0];
+    },
+    async enviarPostre() {
+      const formData = new FormData();
+      formData.append('name', this.nuevoPostre.name);
+      formData.append('price', this.nuevoPostre.price);
+      formData.append('description', this.nuevoPostre.description);
+      formData.append('image', this.nuevoPostre.image_url);
+
+      try {
+        const response = await fetch('http://localhost:4000/desserts', {
+          method: 'POST',
+          body: formData,
+        });
+        if (response.ok) {
+          const postreCreado = await response.json(); // el backend debe devolver el postre creado
+          this.postres.push(postreCreado);
+          alert('Postre agregado exitosamente');
+          // Resetear el formulario
+          this.nuevoPostre = {
+            name: '',
+            price: '',
+            description: '',
+            image_url: null,
+          };
+        } else {
+          alert('Error al agregar el postre');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al enviar la solicitud');
+      }
+    },
+    async cargarPostres() {
+      try {
+        const response = await fetch('http://localhost:4000/desserts');
+        if (response.ok) {
+          this.postres = await response.json();
+        } else {
+          console.error('Error al cargar los postres');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    },
+  },
+  mounted() {
+    this.cargarPostres();
+  },
+};
 </script>
 
 <style>
@@ -71,6 +127,7 @@ body {
   overflow-x: hidden;
   width: 100%;
 }
+
 .contendorBoton {
   display: flex;
   margin-left: 10px;
@@ -111,7 +168,7 @@ body {
 .banner {
   display: flex;
   flex-direction: column;
-  /* columna por defecto (mobile) */
+  margin-top: 60px;
   align-items: center;
   padding: 5px;
   gap: 20px;

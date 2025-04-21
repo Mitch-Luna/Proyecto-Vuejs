@@ -1,12 +1,12 @@
 <template>
   <div class="contenedor-postre">
     <div class="img-container">
-      <img :src="imagen" alt="Imagen del postre" class="postre-img" />
+      <img :src="image_url" alt="Imagen del postre" class="postre-img" />
     </div>
     <div class="postre-info">
-      <h2>{{ nombre }}</h2>
-      <p class="precio">C$ {{ precio }}</p>
-      <p class="descripcion">{{ descripcion }}</p>
+      <h2>{{ name }}</h2>
+      <p class="precio">C$ {{ price }}</p>
+      <p class="descripcion">{{ description }}</p>
     </div>
     <div class=" botones">
       <BotonesPostres texto="Editar" color="rgb(41, 128, 185 )" :accion="agregarElemento" />
@@ -24,19 +24,19 @@ export default {
     BotonesPostres,
   },
   props: {
-    imagen: {
+    image_url: {
       type: String,
       required: true,
     },
-    nombre: {
+    name: {
       type: String,
       required: true,
     },
-    precio: {
+    price: {
       type: String,
       required: true,
     },
-    descripcion: {
+    description: {
       type: String,
       default: "",
     },
@@ -48,9 +48,7 @@ export default {
 .botones {
   width: 100%;
   display: flex;
-  justify-content: center;
   margin-top: 10px;
-  
   justify-content: space-between;
 }
 .img-container {
@@ -69,7 +67,7 @@ export default {
   background-color: rgb(255, 255, 255);
   padding: 20px;
   border-radius: 10px;
-  max-width: 300px;
+  width: 300px;
   margin: auto;
   border-color: #36926f;
   border-width: 15px;
@@ -79,11 +77,12 @@ export default {
 
 .postre-img {
   width: 100%;
-  min-height: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
   object-fit: cover;
   object-position: center;
   display: block;
-  
 }
 
 .postre-info {

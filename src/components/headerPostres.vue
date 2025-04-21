@@ -28,11 +28,11 @@
     font-size: 24px;
     top: 0; 
     left: 0; 
+    position: fixed;
     box-sizing: border-box; 
     z-index: 1000;
-   
     padding: 0 20px; 
-    font-size: 20px;
+    font-size: 20px;;
 }
 .logo {
     width: 50px;
@@ -45,9 +45,9 @@ ul {
     gap: 20px;
 }
 a {
-    text-decoration: none; /* Elimina el subrayado de los enlaces */
-    color: white; /* Usa el color del texto del contenedor padre */
-    font-size: inherit; /* Usa el tamaño de fuente del contenedor padre */
+    text-decoration: none; 
+    color: white; 
+    font-size: inherit; 
 }
 
 
