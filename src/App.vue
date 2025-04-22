@@ -1,101 +1,43 @@
 <template>
-
-
-    <headerPostres msg="" />
-    <div class="banner">
-      <div class="banner-text">
-        <h1>Bienvenidos a la Pastelería</h1>
-        <p>Deliciosos postres para todos los gustos</p>
-      </div>
-      <img src="./assets/banner.webp" alt="Banner" class="banner-image" />
+  <headerPostres msg="" />
+  <div class="banner">
+    <div class="banner-text">
+      <h1>Bienvenidos a la Pastelería</h1>
+      <p>Deliciosos postres para todos los gustos</p>
     </div>
-    <div class="contendorBoton">
-      <BotonesPostres texto="Agregar Postre" color="green" :accion="miFuncion" />
-    </div>
-    <div class="formulario">
-      <h2>Agregar Nuevo Postre</h2>
-      <form @submit.prevent="enviarPostre">
-        <input type="text" v-model="nuevoPostre.name" placeholder="Nombre del postre" required />
-        <input type="number" v-model="nuevoPostre.price" placeholder="Precio" step="0.01" required />
-        <textarea v-model="nuevoPostre.description" placeholder="Descripción del postre" required></textarea>
-        <input type="file" @change="handleFileUpload" required />
-        <button type="submit">Guardar Postre</button>
-      </form>
-    </div>
-    <div class="carrusel">
-      <ContenedorPostres v-for="(postre, index) in postres" :key="index"
-        :image_url="`http://localhost:4000/uploads/${postre.image_url}`"
-        :name="postre.name" :description="postre.description"
-        :price="postre.price" 
-        />
-       
-
-
-    </div>
+    <img src="./assets/banner.webp" alt="Banner" class="banner-image" />
+  </div>
+  <div class="contendorBoton">
+    <CrearPostre @postreCreado="agregarPostreLocal" />
+  </div>
+  <div class="carrusel">
+    <ContenedorPostres v-for="(postre, index) in postres" :key="index" :id="postre.id"
+      :image_url="`http://localhost:4000/uploads/${postre.image_url}`" :name="postre.name"
+      :description="postre.description" :price="postre.price" @postreEliminado="eliminarPostreLocal"
+      @postreEditado="editarPostreLocal" />
+  </div>
 
 </template>
 
 <script>
-import BotonesPostres from './components/BotonesPostres.vue';
 import ContenedorPostres from './components/ContenedorPostres.vue';
-import headerPostres from './components/headerPostres.vue'
+import headerPostres from './components/headerPostres.vue';
+import CrearPostre from './views/CrearPostre.vue';
+
 
 export default {
   name: 'App',
   components: {
     headerPostres,
     ContenedorPostres,
-    BotonesPostres,
+    CrearPostre,
   },
   data() {
     return {
-      nuevoPostre: {
-        name: '',
-        price: '',
-        description: '',
-        image_url: null,
-      },
       postres: [],
     };
   },
   methods: {
-    miFuncion() {
-      alert('agregar postre');
-    },
-    handleFileUpload(event) {
-      this.nuevoPostre.image_url = event.target.files[0];
-    },
-    async enviarPostre() {
-      const formData = new FormData();
-      formData.append('name', this.nuevoPostre.name);
-      formData.append('price', this.nuevoPostre.price);
-      formData.append('description', this.nuevoPostre.description);
-      formData.append('image', this.nuevoPostre.image_url);
-
-      try {
-        const response = await fetch('http://localhost:4000/desserts', {
-          method: 'POST',
-          body: formData,
-        });
-        if (response.ok) {
-          const postreCreado = await response.json(); // el backend debe devolver el postre creado
-          this.postres.push(postreCreado);
-          alert('Postre agregado exitosamente');
-          // Resetear el formulario
-          this.nuevoPostre = {
-            name: '',
-            price: '',
-            description: '',
-            image_url: null,
-          };
-        } else {
-          alert('Error al agregar el postre');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('Error al enviar la solicitud');
-      }
-    },
     async cargarPostres() {
       try {
         const response = await fetch('http://localhost:4000/desserts');
@@ -108,12 +50,26 @@ export default {
         console.error('Error:', error);
       }
     },
+    eliminarPostreLocal(id) {
+      this.postres = this.postres.filter(postre => postre.id !== id);
+    },
+    editarPostreLocal(postreEditado) {
+      const index = this.postres.findIndex(p => p.id === postreEditado.id);
+      if (index !== -1) {
+        this.postres[index] = postreEditado;
+      }
+    },
+
+    agregarPostreLocal(nuevoPostre) {
+      this.postres.push(nuevoPostre);
+    }
   },
   mounted() {
     this.cargarPostres();
-  },
-};
+  }
+}
 </script>
+
 
 <style>
 * {

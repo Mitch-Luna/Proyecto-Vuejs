@@ -9,19 +9,24 @@
       <p class="descripcion">{{ description }}</p>
     </div>
     <div class=" botones">
-      <BotonesPostres texto="Editar" color="rgb(41, 128, 185 )" :accion="agregarElemento" />
-      <BotonesPostres texto="Elimiar" color="	rgb(205, 92, 92) " :accion="agregarElemento" />
+      <EditarPostre :postre="{ id, name, price, description, image_url }" @postreEditado="editarPostre" />
+
+      <EliminarPostre :id="id" @postreEliminado="removerPostre" />
+
     </div>
   </div>
 
 </template>
 
 <script>
-import BotonesPostres from "./BotonesPostres.vue";
+import EliminarPostre from "@/views/EliminarPostre.vue";
+import EditarPostre from "@/views/EditarPostre.vue";
+
 export default {
   name: "ContenedorPostres",
   components: {
-    BotonesPostres,
+    EliminarPostre,
+    EditarPostre
   },
   props: {
     image_url: {
@@ -40,7 +45,19 @@ export default {
       type: String,
       default: "",
     },
+    id: {
+      type: Number,
+      required: true,
+    },
   },
+  methods: {
+      removerPostre(id) {
+        this.$emit("postreEliminado", id);
+      },
+      editarPostre(id) {
+        this.$emit("postreEditado", id);
+      },
+    },
 };
 </script>
 

@@ -1,5 +1,4 @@
 <template>
-
       <button :style="{ backgroundColor: color }" class="boton" @click="accion">
         {{ texto }}
       </button>
