@@ -2,14 +2,14 @@
     <div class="contendorHeader">
         <img src="../assets/logoPatel.png" alt="" class="logo">
             <ul>
-                <li> <a href="#home">Home | </a></li>
-                <li> <a href="#about">About |</a></li>
-                <li> <a href="#contact">Contact |</a></li>
-                <li> <a href="#blog">Blog</a></li>
+                <li> <router-link to="/" class="nav-link">Home | </router-link></li>
+                <li> <router-link to="/SobreNosotros" class="nav-link">About |</router-link></li>
+                <li> <router-link to="/contact" class="nav-link">Contact |</router-link></li>
+                <li> <router-link to="/blog" class="nav-link">Blog</router-link></li>
             </ul>
     </div>
+    
 </template>
-
 <script>
 
 
@@ -18,7 +18,7 @@
 <style>
 .contendorHeader {
     width: 100%;
-    height: 70px;
+    height: 60px;
     background-color: #d0abab;
     color: rgb(229, 192, 192);
     display: flex;
@@ -44,7 +44,7 @@ ul {
     display: flex;
     gap: 20px;
 }
-a {
+.nav-link {
     text-decoration: none; 
     color: white; 
     font-size: inherit; 

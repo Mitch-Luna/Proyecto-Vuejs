@@ -110,22 +110,23 @@ export default {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* fondo oscuro */
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 999;
+    z-index: 2000;
 }
 
 .modal-content {
-    background-color: #fff;
-    padding: 30px 20px;
-    border-radius: 12px;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    position: relative;
-    animation: popup 0.3s ease-out;
+  background-color: #ffffff;
+  padding: 30px 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 100%; 
+   margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: popup 0.3s ease-out;
 }
 
 @keyframes popup {

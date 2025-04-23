@@ -10,9 +10,7 @@
     </div>
     <div class=" botones">
       <EditarPostre :postre="{ id, name, price, description, image_url }" @postreEditado="editarPostre" />
-
       <EliminarPostre :id="id" @postreEliminado="removerPostre" />
-
     </div>
   </div>
 
@@ -71,7 +69,7 @@ export default {
 .img-container {
   display: flex;
   width: 100%;
-  height: 200px;
+  max-height: 200px;
   overflow: hidden;
   border-radius: 10px;
   background-color: #e67e22;
@@ -85,12 +83,14 @@ export default {
   padding: 20px;
   border-radius: 10px;
   width: 300px;
+  height: 400px;
   margin: auto;
   border-color: #36926f;
   border-width: 15px;
   border: 5px solid white;
   box-shadow: 0 5px 10px rgba(56, 48, 48, 0.5); /* rosita pastel */
 }
+
 
 .postre-img {
   width: 100%;
