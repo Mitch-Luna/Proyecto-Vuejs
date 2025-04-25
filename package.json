@@ -8,8 +8,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@primevue/themes": "^4.3.3",
+    "@vee-validate/yup": "^4.15.0",
+    "axios": "^1.9.0",
     "core-js": "^3.8.3",
+    "pinia": "^3.0.2",
     "portal-vue": "^3.0.0",
+    "primevue": "^4.3.3",
+    "vee-validate": "^4.15.0",
     "vue": "^3.2.13",
     "vue-router": "^4.5.0",
     "vue-toastification": "^2.0.0-rc.5"

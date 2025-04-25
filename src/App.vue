@@ -1,11 +1,8 @@
 <template>
-  <div>
+
     <headerPostres />
-    
-  </div>
-  <div>
     <RouterView />
-  </div>
+
 </template>
 
 <script>
@@ -30,6 +27,7 @@ body {
   padding: 0;
   overflow-x: hidden;
   width: 100%;
+  background-color: white;
 }
 
 </style>

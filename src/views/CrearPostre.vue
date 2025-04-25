@@ -102,7 +102,9 @@ export default {
   justify-content: center;
   z-index: 2000;
 }
-
+.agregar{
+    width: 70px;
+}
 .modal-content {
   background-color: #ffffff;
   padding: 30px 20px;
@@ -150,6 +152,7 @@ export default {
 
 .top-bar>* {
     max-height: 50px;
+    width: 180px;
 }
 
 

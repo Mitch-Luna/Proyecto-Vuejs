@@ -1,11 +1,7 @@
 <template>
     <main>
       <div class="banner">
-        <div class="banner-text">
-          <h1>Bienvenidos a la Pastelería</h1>
-          <p>Deliciosos postres para todos los gustos</p>
-        </div>
-        <img src="../assets/banner.webp" alt="Banner" class="banner-image" />
+        <img src="https://www.shutterstock.com/image-vector/banner-design-cakes-muffins-cupcakes-260nw-2107733129.jpg" alt="Banner" class="banner-image" />
       </div>
   
       <div class="contendorBoton">
@@ -77,24 +73,7 @@ import CrearPostre from './CrearPostre.vue';
   </script>
   
 <style scoped>
-* {
-  box-sizing: border-box;
-}
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  width: 100%;
-}
-
-.contendorBoton {
-  display: flex;
-  margin-left: 10px;
-  margin-top: 20px;
-  padding-bottom: 20px;
-}
 
 /* Estilos base */
 .carrusel {
@@ -130,36 +109,18 @@ background-color: rgb(255, 255, 255);
 
 .banner {
   display: flex;
-  flex-direction: column;
-  margin-top: 60px;
   align-items: center;
-  padding: 5px;
-  gap: 20px;
-}
-
-.banner-text {
+  justify-content: center;
+  margin-top: 60px;
+  padding: 15px;
   width: 100%;
-  max-width: 500px;
-  color: #2c3e50;
-  padding: 5px;
-  text-align: center;
-  border-radius: 10px;
-}
-
-.banner-text h1 {
-  font-size: 2em;
-  margin-bottom: 10px;
-}
-
-.banner-text p {
-  font-size: 1.2em;
+  height: 500px;
 }
 
 .banner-image {
   width: 100%;
-  max-width: 600px;
+  height: 100%;
   border-radius: 10px;
-  object-fit: cover;
 }
 
 /* Estilos para pantallas grandes */
@@ -167,18 +128,6 @@ background-color: rgb(255, 255, 255);
   .carrusel {
     /* Mantiene el carrusel horizontal en pantallas grandes */
     flex-direction: row;
-  }
-
-  .banner {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .banner-text,
-  .banner-image {
-    width: 45%;
-    text-align: left;
   }
 
   .banner-text h1 {

@@ -65,6 +65,9 @@ export default {
   display: flex;
   margin-top: 10px;
   justify-content: space-between;
+  z-index: 2000;
+  
+
 }
 .img-container {
   display: flex;
@@ -83,7 +86,7 @@ export default {
   padding: 20px;
   border-radius: 10px;
   width: 300px;
-  height: 400px;
+  height: 470px;
   margin: auto;
   border-color: #36926f;
   border-width: 15px;
